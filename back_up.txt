@@ -1,0 +1,14 @@
+import time
+[MASTER-ALGORITMI] Tiivistetty 3 kertaa: 
+def valvo_ja_varmuuskopioi():
+with open("kvantti_logi.txt", "r") as logi:
+rivit = logi.readlines()
+# Etsitään viimeisin merkintä, jossa tapahtui korjaus
+viimeisin = rivit[-1]
+if "VASTAVIRTA" in viimeisin or "KORJATTU" in viimeisin:
+with open("back_up.txt", "a") as backup:
+backup.write(f"[OPPI_KIRJASTO_LISÄYS] {time.ctime()} | {viimeisin}")
+print("[VALVOJA] Uusi tilanne tallennettu kirjastoon.")
+while True:
+valvo_ja_varmuuskopioi()
+time.sleep(5) # Valvontasykli

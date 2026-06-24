@@ -1,0 +1,109 @@
+#!/usr/bin/env python3
+"""
+Advanced Solar Light Travel Clock with Animation
+Shows light particle traveling from Sun to Earth over 499 seconds
+"""
+
+import time
+import datetime
+from datetime import timedelta
+import os
+
+LIGHT_TRAVEL_TIME = 499  # 8 minutes 12 seconds
+
+def clear_screen():
+    """Clear terminal screen"""
+    os.system('clear' if os.name == 'posix' else 'cls')
+
+def get_sun_time():
+    """Current time on the Sun"""
+    return datetime.datetime.now()
+
+def get_earth_observed_time():
+    """What Earth sees (delayed by light travel time)"""
+    return datetime.datetime.now() - timedelta(seconds=LIGHT_TRAVEL_TIME)
+
+def draw_light_journey():
+    """Draw animated light particles traveling from Sun to Earth"""
+    current_time = time.time()
+    
+    # Create 5 light particles at different stages of journey
+    particles = []
+    for i in range(5):
+        # Each particle emitted at different time
+        particle_start = current_time - (i * LIGHT_TRAVEL_TIME // 5)
+        progress = ((current_time - particle_start) / LIGHT_TRAVEL_TIME) * 100
+        
+        if 0 <= progress <= 100:
+            particles.append(progress)
+    
+    # Draw the journey
+    distance = 50
+    print("\n🌅 LIGHT JOURNEY FROM SUN TO EARTH 🌍\n")
+    
+    for particle_progress in particles:
+        position = int((particle_progress / 100) * distance)
+        
+        line = "☀" + " " * position + "●" + " " * (distance - position) + "🌍"
+        percent = f"{particle_progress:.1f}%"
+        
+        print(f"  {line}  {percent}")
+    
+    print("\n  ☀ = Sun    ● = Light Particle    🌍 = Earth\n")
+
+def show_clock():
+    """Show the full clock display"""
+    clear_screen()
+    
+    sun_real_time = get_sun_time()
+    earth_observed_time = get_earth_observed_time()
+    
+    print("\n" + "=" * 70)
+    print("⚡ SOLAR LIGHT TRAVEL CLOCK ⚡".center(70))
+    print("=" * 70)
+    
+    # Show times
+    print(f"\n  ☀️  CURRENT TIME ON THE SUN (RIGHT NOW):")
+    print(f"      {sun_real_time.strftime('%H:%M:%S')}")
+    
+    print(f"\n  🌍 WHAT EARTH SEES (499 SECONDS BEHIND):")
+    print(f"      {earth_observed_time.strftime('%H:%M:%S')}")
+    
+    print(f"\n  📡 TIME DELAY:")
+    print(f"      8 minutes and 12 seconds (499 seconds)")
+    
+    # Draw the journey
+    draw_light_journey()
+    
+    # Show explanation
+    print("=" * 70)
+    print("WHAT THIS MEANS:")
+    print("=" * 70)
+    print("""
+  When you look at the Sun right now, you're not seeing it as it IS.
+  You're seeing it as it WAS 8 minutes and 12 seconds ago.
+  
+  The light particles are traveling through space RIGHT NOW,
+  on their journey from the Sun to your eyes on Earth.
+  
+  This is called "light travel time" or "light delay."
+  It applies to all objects in space!
+    """)
+    print("=" * 70)
+
+# Main clock loop
+try:
+    cycle = 0
+    while True:
+        cycle += 1
+        show_clock()
+        
+        print(f"\nCycle #{cycle} | Press Ctrl+C to stop | Updating every 2 seconds...")
+        
+        time.sleep(2)
+        
+except KeyboardInterrupt:
+    print("\n\n" + "=" * 70)
+    print("🛑 CLOCK STOPPED".center(70))
+    print("=" * 70)
+    print("\nThanks for exploring light travel time! 🚀\n")

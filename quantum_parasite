@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+import os
+import sys
+from quantum_core import core
+
+def main():
+    if not all(os.path.exists(f".bios_{i}.sys") for i in range(1, 4)):
+        print("Error: Nollatilat (.bios_x.sys) puuttuvat. Aja build_parasite.")
+        sys.exit(1)
+    core.run()
+
+if __name__ == '__main__':
+    main()

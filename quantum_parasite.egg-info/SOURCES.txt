@@ -1,0 +1,6 @@
+setup.py
+quantum_core/__init__.py
+quantum_parasite.egg-info/PKG-INFO
+quantum_parasite.egg-info/SOURCES.txt
+quantum_parasite.egg-info/dependency_links.txt
+quantum_parasite.egg-info/top_level.txt

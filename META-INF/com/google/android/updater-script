@@ -1,0 +1,13 @@
+# Tulostetaan asennuksen edistyminen
+ui_print("Asennetaan Perusta OS (Quantum Parasite)...");
+
+# Määritetään asennuskohteet
+ui_print("Kopioidaan ydintiedostot...");
+package_extract_dir("system", "/system");
+
+# Asetetaan oikeudet, jotta skriptit ovat suoritettavia
+set_perm(0, 0, 0755, "/system/bin/perusta_kaynnistin.sh");
+set_perm(0, 0, 0600, "/system/bin/solu_REG_*.bin");
+
+ui_print("Perusta OS:n ydin on iskostettu.");
+ui_print("Asennus valmis. Käynnistä uudelleen.");

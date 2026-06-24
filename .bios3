@@ -1,0 +1,4 @@
+SESSION_ID=RANDOM
+LOG_PATH=kvantti_logi.txt
+MASTER_LIB=back_up.txt
+AUTO_SAVE=TRUE

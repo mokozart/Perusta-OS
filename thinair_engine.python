@@ -1,0 +1,6 @@
+with open("bios2_monitor.log", "r") as fifo:
+    for linja in fifo:
+        if "MONITOR-VAL" in linja:
+            virta_arvo = int(linja.split(":")[-1])
+            # Nanoäly vertaa lukua universaaliin vakioon 115.740509259
+            analysoi_vivahteet(virta_arvo)
